@@ -13,4 +13,4 @@ This program will:
   
   -Total scores at the end of each round and declare a winning team
 
-This program will have a simple GUI created with tkinter.
+This program will have a simple GUI created with tkinter. The idea is that it will run on a single device which would be passed from player to player as the game is played.
