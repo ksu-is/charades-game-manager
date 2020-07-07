@@ -5,6 +5,7 @@ import tkinter.font as font
 import webbrowser
 
 #function that creates title screen
+
 def title_screen():
     #clear screen first
     for widget in window.winfo_children():
@@ -36,7 +37,7 @@ def credits_screen():
         widget.destroy()
     credits_label = tk.Label(text="TESTLABEL")
     home_button = tk.Button(text="BACK TO HOME")
-    home_button.bind("<Button-1>", title_screen)
+    home_button.bind("<Button-1>", home_click)
     credits_label.pack()
     home_button.pack()
 #what happens when buttons are clicked
@@ -46,7 +47,8 @@ def rules_click(self):
 #clicking credits button
 def credits_click(self):
     credits_screen()
-
+def home_click(self):
+    title_screen()
   
 
 window = tk.Tk()
