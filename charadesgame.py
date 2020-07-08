@@ -3,11 +3,15 @@
 import tkinter as tk
 import tkinter.font as font
 import webbrowser
+import random
 
 #create lists for player-entered info
 names = []
-phrases = []
-
+phrases_dictionary = {}
+phrases_list = []
+used_phrases = []
+test_names = ["OK", "do", "gonna", "it's ", "Feel you!","Last"]
+test_phrases = {'we ': 'OK', 'gonna': 'OK', 'so': 'OK', 'this': 'do', 'when': 'do', 'us': 'do', 'get out': 'gonna', 'of prison ': 'gonna', 'today': 'gonna', 'so ': "it's ", 'close': "it's ", 'I can': "it's ", 'one': 'Feel you!', 'two': 'Feel you!', 'three': 'Feel you!', 'it': 'Last', 'gon': 'Last', 'work': 'Last'}
 #function that creates title screen
 def title_screen():
     #clear screen first
@@ -72,8 +76,8 @@ def credits_screen():
     #bind buttons
     home_button.bind("<Button-1>", home_click)
 
-#function that plays game
-def play_game():
+#function that starts game by allowing players to input names and phrases
+def accept_inputs():
     
     #clear screen first
     for widget in window.winfo_children():
@@ -87,24 +91,23 @@ def play_game():
         else:
             if name_entry.get() != "" and len(phrase_entry1.get().split()) <= 5 and phrase_entry1.get() != "" and len(phrase_entry2.get().split()) <= 5 and phrase_entry2.get() != "" and len(phrase_entry3.get().split()) <= 5 and phrase_entry3.get() != "":
                 names.append(name_entry.get())
-                phrases.append(phrase_entry1.get())
-                phrases.append(phrase_entry2.get())
-                phrases.append(phrase_entry3.get())
+                phrases_dictionary[phrase_entry1.get()] = name_entry.get()
+                phrases_dictionary[phrase_entry2.get()] = name_entry.get()
+                phrases_dictionary[phrase_entry3.get()] = name_entry.get()
                 game_message["text"]="Phrases submitted!"
                 name_entry.delete(0, tk.END)
                 phrase_entry1.delete(0, tk.END)
                 phrase_entry2.delete(0, tk.END)
                 phrase_entry3.delete(0, tk.END)
-
+                print(names)
+                print(phrases_dictionary)
             elif len(phrase_entry1.get().split()) > 5 or phrase_entry1.get() == "" or len(phrase_entry2.get().split()) > 5 or phrase_entry2.get() == "" or len(phrase_entry3.get().split()) > 5 or phrase_entry3.get() == "":
                 game_message["text"]="All phrases must be 1-5 words."
             elif name_entry.get() == "":
                 game_message["text"]="You need to enter a name."
-        print(names)
-        print(phrases)
     def move_on_click(self):
         if len(names) == 6 or len(names) == 8 or len(names) == 10:
-            game_message["text"]="You're ready to move on."
+            play_game()
         else:
             game_message["text"]="You need more players."
     #create widgets
@@ -140,8 +143,13 @@ def play_game():
     submit_button.bind("<Button-1>", submit_click)
     move_on_button.bind("<Button-1>",move_on_click)
 
-
-
+def play_game():
+    for x in test_phrases:
+        phrases_list.append(x)
+    current_player = test_names[0]
+    print(current_player)
+    current_phrase = random.choice(phrases_list)
+    print(current_phrase)
 window = tk.Tk()
 window.title("Charades Manager")
 title_screen()

@@ -13,7 +13,7 @@ timer_widget.reset()
 timer_widget.start_countdown(120)
 ##'update_widget' updates the StringVar used by the widget, normally this
 ## gets called automatically.
-timer_widget.update_widget()
+#timer_widget.update_widget()
 timer_widget.add_seconds(10)
 timer_widget.subtract_seconds(5)
 timer_widget.set_elapsed(99)
