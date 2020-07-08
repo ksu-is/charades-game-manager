@@ -35,11 +35,16 @@ def credits_screen():
     #clear screen first
     for widget in window.winfo_children():
         widget.destroy()
-    credits_label = tk.Label(text="TESTLABEL")
-    home_button = tk.Button(text="BACK TO HOME")
-    home_button.bind("<Button-1>", home_click)
+
+    credits_label = tk.Label(master=window,text="Credits")
+    credits_label["font"] = font.Font(size="24", weight="bold")
+    credits_text = tk.Label(master=window, text="Coding: Raymond Goslow\nTimer: Ostcrom\nRules: Carson Claud\n\nFor IS3020 Summer 2020\nKennesaw State University")
+    home_button = tk.Button(master=window,text="Back")
     credits_label.pack()
+    credits_text.pack()
     home_button.pack()
+    home_button.bind("<Button-1>", home_click)
+
 #what happens when buttons are clicked
 #clicking rules button opens rules in pastebin
 def rules_click(self):
