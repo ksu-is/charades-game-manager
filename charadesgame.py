@@ -4,14 +4,27 @@ import tkinter as tk
 import tkinter.font as font
 import webbrowser
 
-#function that creates title screen
+#create lists for player-entered info
+names = []
+phrases = []
 
+#function that creates title screen
 def title_screen():
     #clear screen first
     for widget in window.winfo_children():
         widget.destroy()
-    
-    
+
+    #what happens when buttons are clicked
+    #clicking play button starts game
+    def play_click(self):
+        play_game()
+    #clicking rules button opens rules in pastebin
+    def rules_click(self):
+        webbrowser.open("https://pastebin.com/WPXtPBig")
+    #clicking credits button opens credits
+    def credits_click(self):
+        credits_screen()
+
     #create widgets
     title = tk.Label(master=window, text="CHARADES", fg="#FFC0CB",)
     title["font"] = font.Font(size="36", weight="bold")
@@ -40,6 +53,11 @@ def credits_screen():
     #clear screen first
     for widget in window.winfo_children():
         widget.destroy()
+        
+    #what happens when buttons are clicked
+    #clicking home button returns to home
+    def home_click(self):
+        title_screen()
 
     #create widgets
     credits_label = tk.Label(master=window,text="Credits",fg="#FFC0CB")
@@ -56,9 +74,26 @@ def credits_screen():
 
 #function that plays game
 def play_game():
+    
     #clear screen first
     for widget in window.winfo_children():
         widget.destroy()
+
+    #what happens when buttons are clicked
+    #clicking submit adds name + phrases to lists
+    def submit_click(self):
+        if name_entry.get() != "" and len(phrase_entry.get().split()) <= 5 and phrase_entry.get() != "":
+            names.append(name_entry.get())
+            phrases.append(phrase_entry.get())
+            game_message["text"]="Phrase submitted!"
+        elif len(phrase_entry.get().split()) > 5 or phrase_entry.get() == "":
+            game_message["text"]="Phrases must be 1-5 words."
+        elif name_entry.get() == "":
+            game_message["text"]="Blank entries not allowed."
+        
+
+        print(names)
+        print(phrases)
 
     #create widgets
     game_label = tk.Label(master=window, text="Enter Information")
@@ -68,6 +103,7 @@ def play_game():
     name_entry = tk.Entry(master=fr_entry)
     phrase_label = tk.Label(master=fr_entry, text="Secret Phrase:")
     phrase_entry = tk.Entry(master=fr_entry)
+    submit_button = tk.Button(master=window, text="Submit")
     #place entry widgets in entry frame
     name_label.grid(row="0", column="0", sticky="e")
     name_entry.grid(row="0", column="1")
@@ -77,20 +113,13 @@ def play_game():
     game_label.pack()
     fr_entry.pack()
     game_message.pack()
-#what happens when buttons are clicked
-#clicking play button starts game
-def play_click(self):
-    play_game()
-#clicking rules button opens rules in pastebin
-def rules_click(self):
-    webbrowser.open("https://pastebin.com/WPXtPBig")
-#clicking credits button opens credits
-def credits_click(self):
-    credits_screen()
-#clicking home button returns to home
-def home_click(self):
-    title_screen()
-  
+    submit_button.pack()
+
+    #bind button
+    submit_button.bind("<Button-1>", submit_click)
+
+
+
 
 window = tk.Tk()
 window.title("Charades Manager")
