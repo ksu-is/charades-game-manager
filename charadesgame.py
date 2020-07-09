@@ -10,8 +10,10 @@ names = []
 phrases_dictionary = {}
 phrases_list = []
 used_phrases = []
-test_names = ["OK", "do", "gonna", "it's ", "Feel you!","Last"]
-test_phrases = {'we ': 'OK', 'gonna': 'OK', 'so': 'OK', 'this': 'do', 'when': 'do', 'us': 'do', 'get out': 'gonna', 'of prison ': 'gonna', 'today': 'gonna', 'so ': "it's ", 'close': "it's ", 'I can': "it's ", 'one': 'Feel you!', 'two': 'Feel you!', 'three': 'Feel you!', 'it': 'Last', 'gon': 'Last', 'work': 'Last'}
+scores = []
+current_phrase = ""
+current_player = ""
+current_player_num = 0
 #function that creates title screen
 def title_screen():
     #clear screen first
@@ -21,7 +23,7 @@ def title_screen():
     #what happens when buttons are clicked
     #clicking play button starts game
     def play_click(self):
-        play_game()
+        accept_inputs()
     #clicking rules button opens rules in pastebin
     def rules_click(self):
         webbrowser.open("https://pastebin.com/WPXtPBig")
@@ -99,8 +101,6 @@ def accept_inputs():
                 phrase_entry1.delete(0, tk.END)
                 phrase_entry2.delete(0, tk.END)
                 phrase_entry3.delete(0, tk.END)
-                print(names)
-                print(phrases_dictionary)
             elif len(phrase_entry1.get().split()) > 5 or phrase_entry1.get() == "" or len(phrase_entry2.get().split()) > 5 or phrase_entry2.get() == "" or len(phrase_entry3.get().split()) > 5 or phrase_entry3.get() == "":
                 game_message["text"]="All phrases must be 1-5 words."
             elif name_entry.get() == "":
@@ -144,12 +144,100 @@ def accept_inputs():
     move_on_button.bind("<Button-1>",move_on_click)
 
 def play_game():
-    for x in test_phrases:
+    #clear screen first
+    for widget in window.winfo_children():
+        widget.destroy()
+
+    
+    #create 0 scores for number of players
+    for x in range(0,len(names)):
+        scores.append(0)
+    #create phrase list
+    for x in phrases_dictionary:
         phrases_list.append(x)
-    current_player = test_names[0]
-    print(current_player)
-    current_phrase = random.choice(phrases_list)
-    print(current_phrase)
+    #start with first player
+    current_player = names[current_player_num]
+    #choose random phrase to start
+    current_phrase = "Click Pass to begin"
+
+
+    #what happens when buttons are clicked
+    def correct_click(self):
+        global current_phrase
+        global current_player_num
+        global current_player
+        global scores
+        used_phrases.append(current_phrase)
+        phrases_list.remove(current_phrase)
+        scores[current_player_num] += 1
+        if phrases_list:
+            current_phrase = random.choice(phrases_list)
+            phrase_widget["text"] = current_phrase
+        else:
+            results_screen()
+        if current_player_num == (len(names) - 1):
+            current_player_num = 0
+        else:
+            current_player_num +=1
+        current_player = names[current_player_num]
+        player_widget["text"] = current_player
+    def pass_click(self):
+        global current_phrase
+        global current_player_num
+        global current_player
+        current_phrase = random.choice(phrases_list)
+        phrase_widget["text"] = current_phrase
+        if current_player_num == (len(names) - 1):
+            current_player_num = 0
+        else:
+            current_player_num +=1
+        current_player = names[current_player_num]
+        player_widget["text"] = current_player
+    #create widgets
+    phrase_widget = tk.Label(master=window,text=current_phrase)
+    timer_widget = tk.Label(master=window,text="")
+    player_widget = tk.Label(master=window,text="")
+    correct_button = tk.Button(master=window, text="Correct")
+    pass_button = tk.Button(master=window, text = "Pass")
+    #place widgets
+    phrase_widget.grid(row="0",column="0", columnspan="2")
+    timer_widget.grid(row="1",column="0", columnspan="2")
+    player_widget.grid(row="2",column="0", columnspan="2")
+    correct_button.grid(row="3",column="0")
+    pass_button.grid(row="3",column="1")
+
+    #bind button
+    correct_button.bind("<Button-1>", correct_click)
+    pass_button.bind("<Button-1>",pass_click)
+
+def results_screen():
+    #clear screen first
+    for widget in window.winfo_children():
+        widget.destroy()
+
+    def home_click(self):
+        names = []
+        phrases_dictionary = {}
+        phrases_list = []
+        used_phrases = []
+        scores = []
+        current_phrase = ""
+        current_player = ""
+        current_player_num = 0
+        title_screen()
+    for num in range(0,int(len(names)/2)):
+        team_names = names[num],"and",names[num+int(len(names)/2)]
+        team_score = scores[num] + scores[num+int(len(names)/2)]
+        team_names_widget = tk.Label(master=window, text=team_names)
+        team_score_widget = tk.Label(master=window, text=team_score)
+        team_names_widget.pack()
+        team_score_widget.pack()
+    home_button = tk.Button(master=window,text="Home")
+    home_button.pack()
+
+    #bind buttons
+    home_button.bind("<Button-1>", home_click)
+
 window = tk.Tk()
 window.title("Charades Manager")
 title_screen()
