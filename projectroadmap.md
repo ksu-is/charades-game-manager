@@ -25,14 +25,14 @@ Progress: Not done. Moved to Sprint 2. [ ]
 
 1. Fix glitch that requires first player to pass. [ ]
 
-2. Check if player's phrase has already been used and require a new phrase if it has. [ ]
+2. Check if player's phrase has already been used and require a new phrase if it has. [✓]
 
-3. Reset all values after returning to the home screen to allow for replay. [ ]
+3. Reset all values after returning to the home screen to allow for replay. [✓]
 
-4. Implement 2nd and 3rd rounds. [ ]
+4. Implement 2nd and 3rd rounds. [✓]
 
 5. Implement timer. [ ]
 
-6. Improve aesthetics. [ ]
+6. Improve aesthetics and communication. [ ]
 
-7. Add ability to export all phrases to txt file at end of game. [ ]
+7. Add ability to export all phrases to txt file at end of game. [✓]
