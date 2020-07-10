@@ -7,7 +7,6 @@ import random
 
 #create variables/lists for player-entered info
 names = []
-phrases_dictionary = {}
 phrases_list = []
 used_phrases = []
 scores = []
@@ -23,7 +22,6 @@ def title_screen():
 
     #reset variables for a new game
     global names
-    global phrases_dictionary
     global phrases_list
     global used_phrases
     global scores
@@ -32,7 +30,6 @@ def title_screen():
     global current_player_num
     global round_counter
     names = []
-    phrases_dictionary = {}
     phrases_list = []
     used_phrases = []
     scores = []
@@ -109,31 +106,40 @@ def accept_inputs():
     #what happens when buttons are clicked
     #clicking submit adds name + phrases to lists
     def submit_click(self):
+        #don't allow more than 10 players
         if len(names) >= 10:
             game_message["text"]="You already have 10 players."
         else:
+            #don't allow duplicate names
             if name_entry.get() in names:
                 game_message["text"]="Someone else is using that name."
-            elif phrase_entry1.get() in phrases_dictionary or phrase_entry2.get() in phrases_dictionary or phrase_entry3.get() in phrases_dictionary:
+            #don't allow duplicating other players' phrases
+            elif phrase_entry1.get() in phrases_list or phrase_entry2.get() in phrases_list or phrase_entry3.get() in phrases_list:
                 game_message["text"]="One of those phrases already exists."
+            #don't allow duplicating your own phrase
             elif phrase_entry1.get() == phrase_entry2.get() or phrase_entry3.get() == phrase_entry1.get() or phrase_entry2.get() == phrase_entry3.get():
                 game_message["text"]="You can't use the same phrase twice."
             else: 
+                #if all conditions are met, add phrases and name to lists
                 if name_entry.get() != "" and len(phrase_entry1.get().split()) <= 5 and phrase_entry1.get() != "" and len(phrase_entry2.get().split()) <= 5 and phrase_entry2.get() != "" and len(phrase_entry3.get().split()) <= 5 and phrase_entry3.get() != "":
                     names.append(name_entry.get())
-                    phrases_dictionary[phrase_entry1.get()] = name_entry.get()
-                    phrases_dictionary[phrase_entry2.get()] = name_entry.get()
-                    phrases_dictionary[phrase_entry3.get()] = name_entry.get()
+                    phrases_list.append(phrase_entry1.get()) 
+                    phrases_list.append(phrase_entry2.get())
+                    phrases_list.append(phrase_entry3.get())
                     game_message["text"]="Phrases submitted!"
+                    #clear for next player
                     name_entry.delete(0, tk.END)
                     phrase_entry1.delete(0, tk.END)
                     phrase_entry2.delete(0, tk.END)
                     phrase_entry3.delete(0, tk.END)
+                #don't allow blank phrase or >5 word phrases
                 elif len(phrase_entry1.get().split()) > 5 or phrase_entry1.get() == "" or len(phrase_entry2.get().split()) > 5 or phrase_entry2.get() == "" or len(phrase_entry3.get().split()) > 5 or phrase_entry3.get() == "":
                     game_message["text"]="All phrases must be 1-5 words."
+                #force entering a name
                 elif name_entry.get() == "":
                     game_message["text"]="You need to enter a name."
     def move_on_click(self):
+        #only allow moving on if there are 6, 8 or 10 players
         if len(names) == 6 or len(names) == 8 or len(names) == 10:
             play_game()
         else:
@@ -167,7 +173,7 @@ def accept_inputs():
     game_message.grid(row="2", column="0",columnspan="2")
     submit_button.grid(row="3", column="0")
     move_on_button.grid(row="3",column="1")
-    #bind button
+    #bind buttons
     submit_button.bind("<Button-1>", submit_click)
     move_on_button.bind("<Button-1>",move_on_click)
 
@@ -176,18 +182,15 @@ def play_game():
     for widget in window.winfo_children():
         widget.destroy()
 
-    #whether it's first round or not
+    #if first round, create scores  - else recycle phrases
     global round_counter
     global phrases_list
     global scores
     global used_phrases
     if round_counter == 1:
-        #create 0 scores for number of players
+        #create 0 scores for all players
         for x in range(0,len(names)):
             scores.append(0)
-        #create phrase list
-        for x in phrases_dictionary:
-            phrases_list.append(x)
     else:
         #recycle all phrases back into pile
         phrases_list = used_phrases
