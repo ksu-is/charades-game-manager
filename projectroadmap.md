@@ -1,21 +1,38 @@
-THINGS THAT NEED TO BE CREATED/FOUND FOR THIS PROJECT:
+## List of Tasks Sprint 1:
 
 1. Home screen that allows users to start the game, read the rules, and see the credits
 
-Progress: mostly done. Home screen exists as a template, but the buttons currently link to nothing. Aesthetics will be improved as well.
+Progress: Complete. [✓]
 
 2. Interface for users to enter names and phrases
 
-Progress: not started
+Progress: Functionality exists. More logic needs to be implemented to prevent duplicate phrase entries. Will be done in Sprint 2. [✓]
 
 3. Function/logic to randomize phrase order behind the scenes
 
-Progress: not started
+Progress: Complete [✓]
 
 4. Ability to show phrases while tracking time with the timer widget (https://github.com/ostcrom/python-tk-timer-widget) and keeping score.
 
-Progress: have tested timer widget, but have not modified it to fit project purpose.
+Progress: Functionality for showing phrases, passing, and tracking score exists. Timer has been tested separately but not implemented. Timer implementation moved to Sprint 2. [✓/X]
 
 5. OPTIONAL: Ability to export all phrases to txt file at game's end.
 
-Progress: Not started.
+Progress: Not done. Moved to Sprint 2. [ ]
+
+
+## List of Tasks Sprint 2:
+
+1. Fix glitch that requires first player to pass. [ ]
+
+2. Check if player's phrase has already been used and require a new phrase if it has. [ ]
+
+3. Reset all values after returning to the home screen to allow for replay. [ ]
+
+4. Implement 2nd and 3rd rounds. [ ]
+
+5. Implement timer. [ ]
+
+6. Improve aesthetics. [ ]
+
+7. Add ability to export all phrases to txt file at end of game. [ ]
