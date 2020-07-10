@@ -5,7 +5,7 @@ import tkinter.font as font
 import webbrowser
 import random
 
-#create lists for player-entered info
+#create variables/lists for player-entered info
 names = []
 phrases_dictionary = {}
 phrases_list = []
@@ -14,6 +14,7 @@ scores = []
 current_phrase = ""
 current_player = ""
 current_player_num = 0
+round_counter = 1
 #function that creates title screen
 def title_screen():
     #clear screen first
@@ -29,6 +30,7 @@ def title_screen():
     global current_phrase
     global current_player
     global current_player_num
+    global round_counter
     names = []
     phrases_dictionary = {}
     phrases_list = []
@@ -37,6 +39,7 @@ def title_screen():
     current_phrase = ""
     current_player = ""
     current_player_num = 0
+    round_counter = 1
 
     #what happens when buttons are clicked
     #clicking play button starts game
@@ -173,13 +176,22 @@ def play_game():
     for widget in window.winfo_children():
         widget.destroy()
 
-    
-    #create 0 scores for number of players
-    for x in range(0,len(names)):
-        scores.append(0)
-    #create phrase list
-    for x in phrases_dictionary:
-        phrases_list.append(x)
+    #whether it's first round or not
+    global round_counter
+    global phrases_list
+    global scores
+    global used_phrases
+    if round_counter == 1:
+        #create 0 scores for number of players
+        for x in range(0,len(names)):
+            scores.append(0)
+        #create phrase list
+        for x in phrases_dictionary:
+            phrases_list.append(x)
+    else:
+        #recycle all phrases back into pile
+        phrases_list = used_phrases
+        used_phrases = []
     #start with first player
     current_player = names[current_player_num]
     #choose random phrase to start
@@ -240,8 +252,13 @@ def results_screen():
     for widget in window.winfo_children():
         widget.destroy()
 
-    def home_click(self):
-        title_screen()
+    def next_click(self):
+        global round_counter
+        if round_counter < 3:
+            round_counter += 1
+            play_game()
+        else:
+            title_screen()
     for num in range(0,int(len(names)/2)):
         team_names = names[num],"and",names[num+int(len(names)/2)]
         team_score = scores[num] + scores[num+int(len(names)/2)]
@@ -249,11 +266,11 @@ def results_screen():
         team_score_widget = tk.Label(master=window, text=team_score)
         team_names_widget.pack()
         team_score_widget.pack()
-    home_button = tk.Button(master=window,text="Home")
-    home_button.pack()
+    next_button = tk.Button(master=window,text="Next")
+    next_button.pack()
 
     #bind buttons
-    home_button.bind("<Button-1>", home_click)
+    next_button.bind("<Button-1>", next_click)
 
 window = tk.Tk()
 window.title("Charades Manager")
