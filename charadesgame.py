@@ -20,6 +20,24 @@ def title_screen():
     for widget in window.winfo_children():
         widget.destroy()
 
+    #reset variables for a new game
+    global names
+    global phrases_dictionary
+    global phrases_list
+    global used_phrases
+    global scores
+    global current_phrase
+    global current_player
+    global current_player_num
+    names = []
+    phrases_dictionary = {}
+    phrases_list = []
+    used_phrases = []
+    scores = []
+    current_phrase = ""
+    current_player = ""
+    current_player_num = 0
+
     #what happens when buttons are clicked
     #clicking play button starts game
     def play_click(self):
@@ -223,14 +241,6 @@ def results_screen():
         widget.destroy()
 
     def home_click(self):
-        names = []
-        phrases_dictionary = {}
-        phrases_list = []
-        used_phrases = []
-        scores = []
-        current_phrase = ""
-        current_player = ""
-        current_player_num = 0
         title_screen()
     for num in range(0,int(len(names)/2)):
         team_names = names[num],"and",names[num+int(len(names)/2)]
