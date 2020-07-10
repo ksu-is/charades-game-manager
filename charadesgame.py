@@ -91,20 +91,27 @@ def accept_inputs():
         if len(names) >= 10:
             game_message["text"]="You already have 10 players."
         else:
-            if name_entry.get() != "" and len(phrase_entry1.get().split()) <= 5 and phrase_entry1.get() != "" and len(phrase_entry2.get().split()) <= 5 and phrase_entry2.get() != "" and len(phrase_entry3.get().split()) <= 5 and phrase_entry3.get() != "":
-                names.append(name_entry.get())
-                phrases_dictionary[phrase_entry1.get()] = name_entry.get()
-                phrases_dictionary[phrase_entry2.get()] = name_entry.get()
-                phrases_dictionary[phrase_entry3.get()] = name_entry.get()
-                game_message["text"]="Phrases submitted!"
-                name_entry.delete(0, tk.END)
-                phrase_entry1.delete(0, tk.END)
-                phrase_entry2.delete(0, tk.END)
-                phrase_entry3.delete(0, tk.END)
-            elif len(phrase_entry1.get().split()) > 5 or phrase_entry1.get() == "" or len(phrase_entry2.get().split()) > 5 or phrase_entry2.get() == "" or len(phrase_entry3.get().split()) > 5 or phrase_entry3.get() == "":
-                game_message["text"]="All phrases must be 1-5 words."
-            elif name_entry.get() == "":
-                game_message["text"]="You need to enter a name."
+            if name_entry.get() in names:
+                game_message["text"]="Someone else is using that name."
+            elif phrase_entry1.get() in phrases_dictionary or phrase_entry2.get() in phrases_dictionary or phrase_entry3.get() in phrases_dictionary:
+                game_message["text"]="One of those phrases already exists."
+            elif phrase_entry1.get() == phrase_entry2.get() or phrase_entry3.get() == phrase_entry1.get() or phrase_entry2.get() == phrase_entry3.get():
+                game_message["text"]="You can't use the same phrase twice."
+            else: 
+                if name_entry.get() != "" and len(phrase_entry1.get().split()) <= 5 and phrase_entry1.get() != "" and len(phrase_entry2.get().split()) <= 5 and phrase_entry2.get() != "" and len(phrase_entry3.get().split()) <= 5 and phrase_entry3.get() != "":
+                    names.append(name_entry.get())
+                    phrases_dictionary[phrase_entry1.get()] = name_entry.get()
+                    phrases_dictionary[phrase_entry2.get()] = name_entry.get()
+                    phrases_dictionary[phrase_entry3.get()] = name_entry.get()
+                    game_message["text"]="Phrases submitted!"
+                    name_entry.delete(0, tk.END)
+                    phrase_entry1.delete(0, tk.END)
+                    phrase_entry2.delete(0, tk.END)
+                    phrase_entry3.delete(0, tk.END)
+                elif len(phrase_entry1.get().split()) > 5 or phrase_entry1.get() == "" or len(phrase_entry2.get().split()) > 5 or phrase_entry2.get() == "" or len(phrase_entry3.get().split()) > 5 or phrase_entry3.get() == "":
+                    game_message["text"]="All phrases must be 1-5 words."
+                elif name_entry.get() == "":
+                    game_message["text"]="You need to enter a name."
     def move_on_click(self):
         if len(names) == 6 or len(names) == 8 or len(names) == 10:
             play_game()
