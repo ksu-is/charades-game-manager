@@ -2,6 +2,7 @@
 
 import tkinter as tk
 import tkinter.font as font
+from tkinter.filedialog import asksaveasfilename
 import webbrowser
 import random
 
@@ -261,7 +262,7 @@ def results_screen():
             round_counter += 1
             play_game()
         else:
-            title_screen()
+            done_screen()
     for num in range(0,int(len(names)/2)):
         team_names = names[num],"and",names[num+int(len(names)/2)]
         team_score = scores[num] + scores[num+int(len(names)/2)]
@@ -274,6 +275,36 @@ def results_screen():
 
     #bind buttons
     next_button.bind("<Button-1>", next_click)
+
+def done_screen():
+    #clear screen first
+    for widget in window.winfo_children():
+        widget.destroy()
+
+    def export_click(self):
+        filepath = asksaveasfilename(
+            defaultextension="txt",
+            filetypes=[("Text Files", "*.txt"), ("All Files", "*.*")],
+        )
+        if not filepath:
+            return
+        with open(filepath, "w") as output_file:
+            text = "\n".join(used_phrases)
+            output_file.write(text)
+        window.title(f"Carson Charades - {filepath}")
+        title_screen()
+    def quit_click(self):
+        title_screen()
+    export_question = tk.Label(master=window, text="Thanks for playing! Would you like to export your phrases as a .txt file?")
+    export_button = tk.Button(master=window, text="Export")
+    quit_button = tk.Button(master=window, text="No Thanks")
+
+    export_question.pack()
+    export_button.pack()
+    quit_button.pack()
+
+    quit_button.bind("<Button-1>",quit_click)
+    export_button.bind("<Button-1>",export_click)
 
 window = tk.Tk()
 window.title("Charades Manager")
