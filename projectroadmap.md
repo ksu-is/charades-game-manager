@@ -67,5 +67,8 @@ Progress: Not started.
 
 4. Schedule and prepare for final project presentation. [ ]
 
-Progress: Not started.
+Progress: Presentation is scheduled, but I still need to practice and prepare.
 
+5. Fully comment my code to document how it works [ ]
+
+Progress: I have some comments already, but I still need to go through and thoroughly document.
