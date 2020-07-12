@@ -46,7 +46,7 @@ def title_screen():
         accept_inputs()
     #clicking rules button opens rules in pastebin
     def rules_click(self):
-        webbrowser.open("https://pastebin.com/WPXtPBig")
+        webbrowser.open("http://studentweb.kennesaw.edu/~rgoslow/charades.html")
     #clicking credits button opens credits
     def credits_click(self):
         credits_screen()
