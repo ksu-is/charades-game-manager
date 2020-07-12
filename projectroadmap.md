@@ -18,7 +18,7 @@ Progress: Functionality for showing phrases, passing, and tracking score exists.
 
 5. OPTIONAL: Ability to export all phrases to txt file at game's end.
 
-Progress: Not done. Moved to Sprint 2. [ ]
+Progress: Not done. Moved to Sprint 2. [x]
 
 
 ## List of Tasks Sprint 2:
@@ -31,7 +31,7 @@ Progress: Not done. Moved to Sprint 2. [ ]
 
 4. Implement 2nd and 3rd rounds. [✓]
 
-5. Implement timer. [ ]
+5. Implement timer. [✓]
 
 6. Improve aesthetics and communication. [ ]
 

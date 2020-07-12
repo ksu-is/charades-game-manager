@@ -5,6 +5,7 @@ import tkinter.font as font
 from tkinter.filedialog import asksaveasfilename
 import webbrowser
 import random
+import tktimerwidget
 
 #create variables/lists for player-entered info
 names = []
@@ -142,6 +143,8 @@ def accept_inputs():
     def move_on_click(self):
         #only allow moving on if there are 6, 8 or 10 players
         if len(names) == 6 or len(names) == 8 or len(names) == 10:
+            global current_player_num
+            current_player_num = len(names) - 1
             play_game()
         else:
             game_message["text"]="You need more players."
@@ -199,7 +202,7 @@ def play_game():
     #start with first player
     current_player = names[current_player_num]
     #choose random phrase to start
-    current_phrase = "Click Pass to begin"
+    current_phrase = "Press Begin when you're ready."
 
 
     #what happens when buttons are clicked
@@ -214,14 +217,14 @@ def play_game():
         if phrases_list:
             current_phrase = random.choice(phrases_list)
             phrase_widget["text"] = current_phrase
+            if current_player_num == (len(names) - 1):
+                current_player_num = 0
+            else:
+                current_player_num +=1
+            current_player = names[current_player_num]
+            player_widget["text"] = current_player
         else:
             results_screen()
-        if current_player_num == (len(names) - 1):
-            current_player_num = 0
-        else:
-            current_player_num +=1
-        current_player = names[current_player_num]
-        player_widget["text"] = current_player
     def pass_click(self):
         global current_phrase
         global current_player_num
@@ -234,22 +237,32 @@ def play_game():
             current_player_num +=1
         current_player = names[current_player_num]
         player_widget["text"] = current_player
+        pass_button["text"] = "Pass"
+        reset_button.grid(row="0",column="1")
+        correct_button.grid(row="0",column="2")
+        timer_widget.start_countdown(120)
+    def reset_click(self):
+        timer_widget.stop()
+        timer_widget.reset()
+        timer_widget.start_countdown(120)
+
     #create widgets
     phrase_widget = tk.Label(master=window,text=current_phrase)
-    timer_widget = tk.Label(master=window,text="")
+    timer_widget = tktimerwidget.TkTimer(window, buttons=True)
     player_widget = tk.Label(master=window,text="")
-    correct_button = tk.Button(master=window, text="Correct")
-    pass_button = tk.Button(master=window, text = "Pass")
+    fr_buttons = tk.Frame(master=window)
+    correct_button = tk.Button(master=fr_buttons, text="Correct")
+    pass_button = tk.Button(master=fr_buttons, text = "Begin")
+    reset_button = tk.Button(master=fr_buttons, text="Reset Timer")
     #place widgets
-    phrase_widget.grid(row="0",column="0", columnspan="2")
-    timer_widget.grid(row="1",column="0", columnspan="2")
-    player_widget.grid(row="2",column="0", columnspan="2")
-    correct_button.grid(row="3",column="0")
-    pass_button.grid(row="3",column="1")
-
+    pass_button.grid(row="0",column="0")
+    phrase_widget.pack()
+    player_widget.pack()
+    fr_buttons.pack()
     #bind button
     correct_button.bind("<Button-1>", correct_click)
-    pass_button.bind("<Button-1>",pass_click)
+    pass_button.bind("<Button-1>", pass_click)
+    reset_button.bind("<Button-1>", reset_click)
 
 def results_screen():
     #clear screen first

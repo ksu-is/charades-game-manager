@@ -19,20 +19,7 @@ class TkTimer(object):
         self._timer_label = tk.Label(self.widget, textvariable=self._timer_stringvar)
         self._timer_label.pack()
 
-        if buttons:
-            start_btn = tk.Button(self.widget, text="Start Timer", command=self.start_timer)
-            start_btn.pack()
-            stop_btn = tk.Button(self.widget, text="Stop", command=self.stop)
-            stop_btn.pack()
-            reset_btn = tk.Button(self.widget, text="Reset", command=self.reset)
-            reset_btn.pack()
-
-            countdown_entry = tk.Entry(self.widget, width=3)
-            countdown_entry.pack()
-            countdown_seconds = lambda: self.start_countdown(int(countdown_entry.get()))
-            countdown_start_btn = tk.Button(self.widget, text="Start Countdown", command=countdown_seconds)
-            countdown_start_btn.pack()
-
+   
 
         self.widget.pack()
         self.reset()
