@@ -53,9 +53,9 @@ Progress: Complete.
 
 ## List of Tasks Sprint 3:
 
-1. Polish aesthetics and presentation. Increase font and window size and remove irregular/asymmetric shapes. Try to create a "unique look and feel". [ ]
+1. Polish aesthetics and presentation. Increase font and window size and remove irregular/asymmetric shapes. Try to create a "unique look and feel". [✓]
 
-Progress: Not started.
+Progress: Complete.
 
 2. Create "splash screen" Powerpoint slide. [ ]
 
@@ -65,10 +65,10 @@ Progress: Not started.
 
 Progress: Not started.
 
-4. Schedule and prepare for final project presentation. [ ]
+4. Schedule and prepare for final project presentation. [✓/X]
 
 Progress: Presentation is scheduled, but I still need to practice and prepare.
 
-5. Fully comment my code to document how it works [ ]
+5. Fully comment my code to document how it works. [✓]
 
-Progress: I have some comments already, but I still need to go through and thoroughly document.
+Progress: Complete.
