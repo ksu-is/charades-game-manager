@@ -7,7 +7,7 @@ import webbrowser
 import random
 import tktimerwidget
 
-#create variables/lists for
+#create variables/lists for player and game info
 names = []
 phrases_list = []
 used_phrases = []
@@ -273,14 +273,14 @@ def play_game():
         timer_widget.start_countdown(120)
 
     #create widgets
-    phrase_widget = tk.Label(master=window,text=current_phrase)
+    phrase_widget = tk.Label(master=window,text=current_phrase, font="sans-serif 15 bold")
     timer_widget = tktimerwidget.TkTimer(window, buttons=True)
         #frame for buttons
     fr_buttons = tk.Frame(master=window)
-    player_widget = tk.Label(master=window,text="")
-    correct_button = tk.Button(master=fr_buttons, text="Correct")
-    pass_button = tk.Button(master=fr_buttons, text = "Begin")
-    reset_button = tk.Button(master=fr_buttons, text="Reset Timer")
+    player_widget = tk.Label(master=window,text="", font="sans-serif 15 bold")
+    correct_button = tk.Button(master=fr_buttons, text="Correct", font="sans-serif 20 bold", fg="#FFFFFF", bg="#000000")
+    pass_button = tk.Button(master=fr_buttons, text = "Begin", font="sans-serif 20 bold", fg="#FFFFFF", bg="#000000")
+    reset_button = tk.Button(master=fr_buttons, text="Reset Timer", font="sans-serif 20 bold", fg="#FFFFFF", bg="#000000")
 
 
     #place widgets
@@ -311,18 +311,22 @@ def results_screen():
         #if round 3, finish
         else:
             done_screen()
-    
+
+    #create and pack results title
+    results_title = tk.Label(master=window, text="Results Round "+str(round_counter), fg="#FFC0CB", bg="#42F548", height="1", font="Impact 36 bold")
+    results_title.pack(fill=tk.X)
+
     #iterate through all teams and display their scores by creating and packing widgets
     for num in range(0,int(len(names)/2)):
         team_names = names[num],"and",names[num+int(len(names)/2)]
         team_score = scores[num] + scores[num+int(len(names)/2)]
-        team_names_widget = tk.Label(master=window, text=team_names)
-        team_score_widget = tk.Label(master=window, text=team_score)
+        team_names_widget = tk.Label(master=window, text=team_names, font="sans-serif 15 bold")
+        team_score_widget = tk.Label(master=window, text=team_score, font="sans-serif 15 bold")
         team_names_widget.pack()
         team_score_widget.pack()
 
-    #create and place button
-    next_button = tk.Button(master=window,text="Next")
+    #create and pack button
+    next_button = tk.Button(master=window,text="Next", font="sans-serif 20 bold", fg="#FFFFFF", bg="#000000")
     next_button.pack()
 
     #bind button
@@ -352,9 +356,9 @@ def done_screen():
         title_screen()
 
     #create widgets
-    export_question = tk.Label(master=window, text="Thanks for playing! Would you like to export your phrases as a .txt file?")
-    export_button = tk.Button(master=window, text="Export")
-    quit_button = tk.Button(master=window, text="No Thanks")
+    export_question = tk.Label(master=window, text="Thanks for playing!\nWould you like to export your phrases as a .txt file?", font="sans-serif 15 bold")
+    export_button = tk.Button(master=window, text="Export", font="sans-serif 20 bold", fg="#FFFFFF", bg="#000000")
+    quit_button = tk.Button(master=window, text="No Thanks", font="sans-serif 20 bold", fg="#FFFFFF", bg="#000000")
 
     #pack all widgets
     export_question.pack()

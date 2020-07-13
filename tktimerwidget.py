@@ -15,9 +15,9 @@ class TkTimer(object):
         ##Set up tkinter widgets:
         self.widget = tk.Frame(self.root)
         self._timer_stringvar = tk.StringVar()
-        self._timer_stringvar.set("00:00:00")
-        self._timer_label = tk.Label(self.widget, textvariable=self._timer_stringvar, fg="#FFC0CB", bg="#42F548", height="1", font="Impact 60 bold")
-        self._timer_label.pack()
+        self._timer_stringvar.set("00:00:00.00")
+        self._timer_label = tk.Label(self.widget, textvariable=self._timer_stringvar, fg="#FFC0CB", bg="#42F548", height="1", font="sans-serif 36 bold")
+        self._timer_label.pack(fill=tk.X)
 
         #RG - all widgets except timer label were removed in order to tailor the timer to my game
 
