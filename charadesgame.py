@@ -16,6 +16,7 @@ current_phrase = ""
 current_player = ""
 current_player_num = 0
 round_counter = 1
+
 #function that creates title screen
 def title_screen():
     #clear screen first
@@ -52,22 +53,20 @@ def title_screen():
         credits_screen()
 
     #create widgets
-    title = tk.Label(master=window, text="CHARADES", fg="#FFC0CB",)
-    title["font"] = font.Font(size="36", weight="bold")
+    title = tk.Label(master=window, text="CHARADES", fg="#FFC0CB", bg="#42F548", height="1", font="Impact 60 bold")
     fr_buttons = tk.Frame(master=window, bg="white")
-    play_button = tk.Button(master=fr_buttons,text="Play")
-    rules_button = tk.Button(master=fr_buttons,text="Rules")
-    credits_button = tk.Button(master=fr_buttons,text="Credits")
+    play_button = tk.Button(master=fr_buttons,text="Play", font="sans-serif 30 bold", fg="#FFFFFF", bg="#000000")
+    rules_button = tk.Button(master=fr_buttons,text="Rules", font="sans-serif 30 bold", fg="#FFFFFF", bg="#000000")
+    credits_button = tk.Button(master=fr_buttons,text="Credits", font="sans-serif 30 bold", fg="#FFFFFF", bg="#000000")
 
     #place buttons in button frame
-    play_button.grid(row="0", column="0", sticky="ew")
-    rules_button.grid(row="1", column="0", sticky="ew")
-    credits_button.grid(row="2", column="0", sticky="ew")
+    play_button.grid(row="0", column="1", sticky="ew")
+    rules_button.grid(row="0", column="0", sticky="ew")
+    credits_button.grid(row="0", column="2", sticky="ew")
 
     #place all widgets
-    title.grid(row="0", column="0")
-    fr_buttons.grid(row="1", column="0")
-
+    title.pack(fill=tk.X)
+    fr_buttons.pack()
 
     #bind buttons
     play_button.bind("<Button-1>", play_click)
@@ -86,12 +85,11 @@ def credits_screen():
         title_screen()
 
     #create widgets
-    credits_label = tk.Label(master=window,text="Credits",fg="#FFC0CB")
-    credits_label["font"] = font.Font(size="24", weight="bold")
-    credits_text = tk.Label(master=window, text="Coding: Raymond Goslow\nTimer: Ostcrom\nRules: Carson Claud\n\nFor IS3020 Summer 2020\nKennesaw State University")
-    home_button = tk.Button(master=window,text="Back")
+    credits_label = tk.Label(master=window,text="Credits",fg="#FFC0CB", bg="#42F548", height="1", font="Impact 60 bold")
+    credits_text = tk.Label(master=window, text="Coding: Raymond Goslow\nTimer: Ostcrom\nRules: Carson Claud\n\nFor IS3020 Summer 2020\nKennesaw State University", font="sans-serif 15 bold")
+    home_button = tk.Button(master=window,text="Back", font="sans-serif 15 bold", fg="#FFFFFF", bg="#000000")
     #place all widgets
-    credits_label.pack()
+    credits_label.pack(fill=tk.X)
     credits_text.pack()
     home_button.pack()
 
@@ -149,19 +147,20 @@ def accept_inputs():
         else:
             game_message["text"]="You need more players."
     #create widgets
-    game_label = tk.Label(master=window, text="Enter Information")
-    game_message = tk.Label(master=window,text="")
-    fr_entry = tk.Frame(master=window, bg="white")
-    name_label = tk.Label(master=fr_entry, text="Name:")
+    game_label = tk.Label(master=window, text="Enter Information", fg="#FFC0CB", bg="#42F548", height="1", font="Impact 36 bold")
+    game_message = tk.Label(master=window,text="", font="sans-serif 15 bold")
+    fr_entry = tk.Frame(master=window)
+    fr_buttons = tk.Frame(master=window)
+    name_label = tk.Label(master=fr_entry, text="Name:", font="sans-serif 15 bold")
     name_entry = tk.Entry(master=fr_entry)
-    phrase_label1 = tk.Label(master=fr_entry, text="Secret Phrase:")
-    phrase_label2 = tk.Label(master=fr_entry, text="Secret Phrase:")
-    phrase_label3 = tk.Label(master=fr_entry, text="Secret Phrase:")
-    phrase_entry1 = tk.Entry(master=fr_entry)
-    phrase_entry2 = tk.Entry(master=fr_entry)
-    phrase_entry3 = tk.Entry(master=fr_entry)
-    submit_button = tk.Button(master=window, text="Submit")
-    move_on_button = tk.Button(master=window, text="Move On")
+    phrase_label1 = tk.Label(master=fr_entry, text="Secret Phrase:", font="sans-serif 15 bold")
+    phrase_label2 = tk.Label(master=fr_entry, text="Secret Phrase:", font="sans-serif 15 bold")
+    phrase_label3 = tk.Label(master=fr_entry, text="Secret Phrase:", font="sans-serif 15 bold")
+    phrase_entry1 = tk.Entry(master=fr_entry, width="40")
+    phrase_entry2 = tk.Entry(master=fr_entry, width="40")
+    phrase_entry3 = tk.Entry(master=fr_entry, width="40")
+    submit_button = tk.Button(master=fr_buttons, text="Submit", font="sans-serif 20 bold", fg="#FFFFFF", bg="#000000")
+    move_on_button = tk.Button(master=fr_buttons, text="Move On", font="sans-serif 20 bold", fg="#FFFFFF", bg="#000000")
     #place entry widgets in entry frame
     name_label.grid(row="0", column="0", sticky="e")
     name_entry.grid(row="0", column="1")
@@ -171,12 +170,13 @@ def accept_inputs():
     phrase_entry2.grid(row="2", column="1", sticky="w")
     phrase_label3.grid(row="3",column="0", sticky="e")
     phrase_entry3.grid(row="3", column="1", sticky="w")
+    submit_button.grid(row="0", column="0")
+    move_on_button.grid(row="1",column="0")
     #place all widgets
-    game_label.grid(row="0", column="0",columnspan="2")
-    fr_entry.grid(row="1", column="0",columnspan="2")
-    game_message.grid(row="2", column="0",columnspan="2")
-    submit_button.grid(row="3", column="0")
-    move_on_button.grid(row="3",column="1")
+    game_label.pack(fill=tk.X)
+    fr_entry.pack()
+    game_message.pack()
+    fr_buttons.pack()
     #bind buttons
     submit_button.bind("<Button-1>", submit_click)
     move_on_button.bind("<Button-1>",move_on_click)
@@ -321,5 +321,6 @@ def done_screen():
 
 window = tk.Tk()
 window.title("Charades Manager")
+window.geometry("500x350")
 title_screen()
 window.mainloop()
