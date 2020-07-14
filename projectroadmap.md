@@ -57,13 +57,13 @@ Progress: Complete.
 
 Progress: Complete.
 
-2. Create "splash screen" Powerpoint slide. [ ]
+2. Create "splash screen" Powerpoint slide. [✓]
 
-Progress: Not started.
+Progress: Complete.
 
-3. Test full round of game with actual players and get feedback. [ ]
+3. Test full round of game with actual players and get feedback. [✓]
 
-Progress: Not started.
+Progress: Complete. Feedback taken into account.
 
 4. Schedule and prepare for final project presentation. [✓/X]
 
