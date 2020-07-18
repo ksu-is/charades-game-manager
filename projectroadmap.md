@@ -65,9 +65,9 @@ Progress: Complete.
 
 Progress: Complete. Feedback taken into account.
 
-4. Schedule and prepare for final project presentation. [✓/X]
+4. Schedule and prepare for final project presentation. [✓]
 
-Progress: Presentation is scheduled, but I still need to practice and prepare.
+Progress: Complete. Presentation was prepared, practiced and delivered.
 
 5. Fully comment my code to document how it works. [✓]
 
